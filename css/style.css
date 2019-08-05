@@ -1,0 +1,67 @@
+
+main {
+    padding-top: 3rem;
+}
+
+a ion-icon, .btn ion-icon {
+    vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+    main {
+        padding-top: 6rem;
+    }
+}
+
+h1, #multimidia, #resultado {
+    text-align: center;
+}
+
+#loading {
+    position: fixed;
+    top: 3.5rem;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#respostas {
+    position: relative;
+}
+
+#enviando {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ccc9;
+}
+
+ol.respostas li {
+    cursor: pointer;
+}
+
+ol.respostas li.enabled:hover {
+    background-color: gray;
+    transition: 0.3s;
+}
+
+ol.respostas li.wrong {
+    cursor: not-allowed;
+    background-color: #ff8080;
+    text-decoration: line-through;
+    transition: 0.3s;
+}
+
+ol.respostas li.correct {
+    cursor: default;
+    background-color: #80ff80;
+    transition: 0.3s;
+}
+
+ol.respostas.desativado li {
+    cursor: default;
+}
