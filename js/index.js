@@ -34,10 +34,9 @@ var app = new Vue({
                 app.enviando = false;
                 if (!data.acertou) {
                     app.respostasDadas.push(data.respostas[data.respostas.length -1]);
-                } else {
-                    app.correta = data.respostas[data.respostas.length -1];
                 }
                 if (data.acertou || app.respostasDadas.length > 2) {
+                    app.correta = data.correta;
                     app.proxima = true;
                 }
             });
