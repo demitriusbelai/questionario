@@ -11,7 +11,11 @@ if (!isset($_SESSION['questoes'])) {
     $_SESSION['questoes'] = $questoes;
     $_SESSION['atual'] = 0;
     $_SESSION['respostas'] = [];
-    //TODO: Salvar usuario_questionario
+    $usuarioQuestionario = new UsuarioQuestionario();
+    $usuarioQuestionario->setUsuario('anonymous');
+    $usuarioQuestionario->setHoraInicio(date('Y-m-d H:i:s'));
+    $usuarioQuestionario->save();
+    $_SESSION['usuarioQuestionario'] = $usuarioQuestionario;
 }
 
 if ($_SESSION['atual'] >= count($_SESSION['questoes'])) {
@@ -24,6 +28,9 @@ if ($_SESSION['atual'] >= count($_SESSION['questoes'])) {
         'acertos' => $acertos,
         'total' => $total,
     ];
+    $usuarioQuestionario = $_SESSION['usuarioQuestionario'];
+    $usuarioQuestionario->setHoraTermino(date('Y-m-d H:i:s'));
+    $usuarioQuestionario->save();
     header('Content-type: application/json');
     echo json_encode($data);
     exit;
@@ -49,7 +56,13 @@ foreach ($questao->getRespostas() as $resposta) {
     ];
 }
 
-//TODO: Salvar usuario_questao
+$usuarioQuestionario = $_SESSION['usuarioQuestionario'];
+$usuarioQuestao = new UsuarioQuestao();
+$usuarioQuestao->setUsuarioQuestionario($usuarioQuestionario);
+$usuarioQuestao->setQuestao($questao);
+$usuarioQuestao->setHoraInicio(date('Y-m-d H:i:s'));
+$usuarioQuestao->save();
+$_SESSION['usuarioQuestao'] = $usuarioQuestao;
 
 header('Content-type: application/json');
 echo json_encode($data);

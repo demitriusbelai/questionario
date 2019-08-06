@@ -43,7 +43,12 @@ if ($correta == null) {
     exit;
 }
 
-//TODO: Salvar usuario_questao_resposta
+$usuarioQuestao = $_SESSION['usuarioQuestao'];
+$usuarioQuestaoResposta = new UsuarioQuestaoResposta();
+$usuarioQuestaoResposta->setUsuarioQuestao($usuarioQuestao);
+$usuarioQuestaoResposta->setResposta($resposta);
+$usuarioQuestaoResposta->setHora(date('Y-m-d H:i:s'));
+$usuarioQuestaoResposta->save();
 
 $_SESSION['respostas'][] = $id_resposta;
 
@@ -57,6 +62,8 @@ if (count($_SESSION['respostas']) > 2 || $data['acertou']) {
     $_SESSION['atual']++;
     $_SESSION['respostas'] = [];
     $_SESSION['resultado'][] = $data['acertou'];
+    $usuarioQuestao->setHoraTermino(date('Y-m-d H:i:s'));
+    $usuarioQuestao->save();
 }
 
 header('Content-type: application/json');
