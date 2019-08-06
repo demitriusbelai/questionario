@@ -12,8 +12,6 @@ class Database {
             Database::$dbh->query("SET CHARACTER SET 'utf8'");
         } catch (PDOException $e) {
             echo 'Falha de conexão: ' . $e->getMessage();
-            echo '<br/>';
-            echo 'Necessário habilitar "extension=php_pdo_mysql.dll" no php.ini';
             exit();
         }
     }
