@@ -46,7 +46,7 @@ var app = new Vue({
             app.carregando = true;
             app.proxima = false;
             $.ajax({url: 'pergunta.php'}).done(function (data) {
-                if (data.acertos) {
+                if (data.acertos != null) {
                     app.acertos = data.acertos;
                     app.numTotal = data.total;
                     app.resultado = true;
