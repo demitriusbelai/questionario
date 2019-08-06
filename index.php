@@ -2,4 +2,4 @@
 
 require_once('bootstrap.php');
 
-include('view/index.php');
+echo file_get_contents('view/index.min.html');
